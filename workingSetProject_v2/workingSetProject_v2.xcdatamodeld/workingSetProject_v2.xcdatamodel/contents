@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="Card" syncable="YES">
+        <attribute name="cardName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cardOwner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateLastAccessed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rfidValue" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="associatedWD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkingDomain" inverseName="associatedCards" inverseEntity="WorkingDomain" syncable="YES"/>
+    </entity>
+    <entity name="File" syncable="YES">
+        <attribute name="nameOfFile" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameOfPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="associatedWD" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkingDomain" inverseName="associatedFiles" inverseEntity="WorkingDomain" syncable="YES"/>
+    </entity>
+    <entity name="User_Attr" syncable="YES">
+        <attribute name="serialPortPath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="WorkingDomain" syncable="YES">
+        <attribute name="dateLastAccessed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameOfWD" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="noteForWD" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="associatedCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="associatedWD" inverseEntity="Card" syncable="YES"/>
+        <relationship name="associatedFiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="File" inverseName="associatedWD" inverseEntity="File" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Card" positionX="-63" positionY="27" width="128" height="135"/>
+        <element name="File" positionX="-54" positionY="9" width="128" height="90"/>
+        <element name="User_Attr" positionX="-54" positionY="9" width="128" height="60"/>
+        <element name="WorkingDomain" positionX="-63" positionY="-18" width="128" height="120"/>
+    </elements>
+</model>

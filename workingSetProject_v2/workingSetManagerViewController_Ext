@@ -1,0 +1,4 @@
+
+import Cocoa
+
+extension workingSet
