@@ -10,37 +10,6 @@ import Cocoa
 
 class debuggingWindow: NSViewController {
 
-//    @IBOutlet weak var debuggingText: NSTextField!
-//    
-//    func updateValueStatus(){
-//        debuggingText.stringValue = " canAssociateVar: \(singleton.canAssociateVar)\n "
-//   
-////        if(singleton.readCard != nil){
-////            debuggingText.stringValue = debuggingText.stringValue + " readCard: \(singleton.readCard.valueForKey("rfidValue"))\n "
-////        }
-//        
-//        if(singleton.openedWD != nil){
-//            debuggingText.stringValue = debuggingText.stringValue + " openedWD: \(singleton.openedWD)\n "
-//        }
-//        
-//
-//            debuggingText.stringValue = debuggingText.stringValue + " serialPath: \(singleton.serialPath)\n "
-//        
-//    }
-//    
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        //updateValueStatus()
-//        debuggingText.stringValue = ""
-//        // Do view setup here.
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateValueStatus",name:"UVS", object: nil)
-//
-//    }
-    
-    
-    
-    
     
     var iteration = 0
     var windowController : NSWindowController?
@@ -64,11 +33,45 @@ class debuggingWindow: NSViewController {
     @IBOutlet weak var statusLabel: NSTextField!
     
     
+    @IBOutlet weak var scannerStatus: NSTextField!
+    
+    
     /*Outlets for Buttons*/
     @IBOutlet weak var openWDButton: NSButton!
     @IBOutlet weak var associateWDButton: NSButton!
     @IBOutlet weak var deleteWDButton: NSButton!
     
+    
+    @IBOutlet weak var textField: NSTextField!
+    
+    
+    
+    
+    
+    
+    func setNoteTable(){
+        
+        if(nameOfWS != nil){
+        
+            let wd = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: nameOfWS)
+            
+            
+            
+            let noteOfWD = wd.valueForKey("noteForWD")
+            
+            if( noteOfWD == nil ){
+                textField.stringValue = "Type your notes here."
+            }
+            else{
+                textField.stringValue = noteOfWD as! String
+            }
+        }
+        else{
+            textField.stringValue = "Type your notes here."
+        }
+        
+    }
+
     
     
     /*Function for toggling between off and on state of buttons.*/
@@ -78,9 +81,33 @@ class debuggingWindow: NSViewController {
         //associateWDButton.enabled  = associateActive
     }
     
+    func setStatusLabel(){
+        statusLabel.textColor = NSColor.grayColor()
+        statusLabel.stringValue = "No Context is Selected"
+    }
     
     
+    func setScannerStatus(){
+        scannerStatus.textColor = NSColor.grayColor()
+        scannerStatus.stringValue = "Scanner is disconnected."
+    }
     
+   
+
+    
+    func scannerStatSet(notification: NSNotification){
+        let arrayObject = notification .object as! [AnyObject]
+        let recievedValue = arrayObject[0] as! Bool
+        
+        if(recievedValue == true){
+            scannerStatus.textColor = NSColor.greenColor()
+            scannerStatus.stringValue = "Scanner is connected."
+        }
+        else{
+            scannerStatus.textColor = NSColor.redColor()
+            scannerStatus.stringValue = "Scanner is disconnected."
+        }
+    }
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -97,9 +124,10 @@ class debuggingWindow: NSViewController {
         tableView.doubleAction = "tableViewDoubleClick:"
         //Setting up sorting configuration:
         
+        setStatusLabel()
+        setScannerStatus()
         
-        
-        
+        setNoteTable()
         
         
         let nameDesc = "Name"
@@ -119,6 +147,9 @@ class debuggingWindow: NSViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "AssociateWDButton", name: "AW", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "deleteWDButton", name: "delWD", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "scannerStatSet:", name: "scanSet", object: nil)
+        
         
     }
     
@@ -171,19 +202,48 @@ class debuggingWindow: NSViewController {
     
     @IBAction func onEnterChangeNameOfWD(sender: NSTextField) {
         print("Name changed.")
-        singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "nameOfWD", idName: nameOfWS, editName: sender.stringValue)
-        //NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
         
-        singleton.openedWD = sender.stringValue
-        NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
-        tableView.reloadData()
-        
+        if(nameOfWS != nil){
+            singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "nameOfWD", idName: nameOfWS, editName: sender.stringValue)
+            //NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
+            
+            singleton.openedWD = sender.stringValue
+            //NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
+            
+            
+            singleton.coreDataObject.editEntityObject("WorkingDomain", nameOfKey: "nameOfWD", oldName: nameOfWS, editName: sender.stringValue)
+            
+            statusLabel.stringValue = "Context's name, " + nameOfWS + ", was changed to " + sender.stringValue
+            
+            nameOfWS = sender.stringValue
+            
+            
+            tableView.reloadData()
+        }
         
     }
     
     
+    @IBAction func switchBetweenContextFunc(sender: AnyObject) {
+        
+        if(nameOfWS != nil){
+            statusLabel.stringValue = "The context was switched to " + nameOfWS
+        }
+        
+        
+        
+    }
     
-    
+    @IBAction func onEnterTextFieldButton(sender: NSTextField) {
+        if(nameOfWS != nil){
+        print("Note saved!")
+        
+        statusLabel.stringValue = "Annotation for " + nameOfWS + " was saved."
+        
+        singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "noteForWD", idName: nameOfWS, editName: sender.stringValue)
+        }
+        
+    }
     
     
     // MARK: - Button Actions
@@ -260,22 +320,22 @@ class debuggingWindow: NSViewController {
         
         
         reloadFileList()
-        
-        // Enable buttons.
-        switchOnOffButtons(true,deleteActive: true,associateActive: false)
-        
-        
-        
-        // 1 - Setting window object.
-        let openWindowObject = windowManager()
-        openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
-        
-        // 2 - Setting the values of the window object.
-        windowController = openWindowObject.get_windowController()
-        let openWindowViewController = windowController!.contentViewController as! WorkingDomainController
-        
-        // 3 - Initiate the window.
-        windowController!.showWindow(sender)
+//        
+//        // Enable buttons.
+//        switchOnOffButtons(true,deleteActive: true,associateActive: false)
+//        
+//        
+//        
+//        // 1 - Setting window object.
+//        let openWindowObject = windowManager()
+//        openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
+//        
+//        // 2 - Setting the values of the window object.
+//        windowController = openWindowObject.get_windowController()
+//        let openWindowViewController = windowController!.contentViewController as! WorkingDomainController
+//        
+//        // 3 - Initiate the window.
+//        windowController!.showWindow(sender)
         
     }
     
@@ -303,9 +363,18 @@ class debuggingWindow: NSViewController {
     }
     
     @IBAction func deleteWDButton(sender: AnyObject) {
-        print("Delete.")
-        singleton.coreDataObject.deleteEntityObject("WorkingDomain", nameOfKey: "nameOfWD", nameOfObject: nameOfWS)
-        reloadFileList()
+        
+        if(nameOfWS != nil){
+            print("Delete.")
+            statusLabel.stringValue = nameOfWS + " was deleted."
+        
+            singleton.coreDataObject.deleteEntityObject("WorkingDomain", nameOfKey: "nameOfWD", nameOfObject: nameOfWS)
+            reloadFileList()
+            
+            nameOfWS = nil
+            
+            setNoteTable()
+        }
     }
     
     func AW_notif(){
@@ -343,6 +412,10 @@ extension debuggingWindow : NSTableViewDataSource {
         
         nameOfWS =  launchWindowTable.getItemSelected_String(tableView, managedObjectArray: workingSets, objectAttr: "nameOfWD")
         
+        statusLabel.stringValue = nameOfWS + " is selected."
+        
+        setNoteTable()
+        
         // 3 - When a working set is seleted from the table view, launch window buttons are then made available to be pressed.
         switchOnOffButtons(true,deleteActive: true,associateActive: false)
     }
@@ -353,7 +426,9 @@ extension debuggingWindow : NSTableViewDataSource {
         if(nameOfWS != nil){
             singleton.openedWD = nameOfWS
             NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
-            self.openWDButton(self)
+            
+            //self.openWDButton(self)    <----- THIS IS WHERE WE PUT THE CODE TO OPEN THE CONTEXT CONTENT
+            
             nameOfWS = nil
         }
         else{
@@ -435,7 +510,8 @@ extension debuggingWindow : NSTableViewDelegate {
             text = value!
             cellIdentifier = "NameCellID"
         } else if tableColumn == tableView.tableColumns[1] {
-            text = date!
+            //text = date!
+            text = ""
             cellIdentifier = "DateCellID"
         }
         

@@ -101,15 +101,28 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPortWasOpened(serialPort: ORSSerialPort) {
         print("Open!")
+        let arrayObject : [AnyObject] = [false]
+        NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
+
+        
     }
     
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPortWasClosed(serialPort: ORSSerialPort) {
         print("Closed!")
+        let value = false
+
+        let arrayObject : [AnyObject] = [false]
+        NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
+
     }
     
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPort(serialPort: ORSSerialPort, didReceivePacket packetData: NSData, matchingDescriptor descriptor: ORSSerialPacketDescriptor) {
+        
+        let arrayObject : [AnyObject] = [true]
+        NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
+        
         if let string = NSString(data: packetData, encoding: NSUTF8StringEncoding) {
             
      
@@ -169,6 +182,8 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPortWasRemovedFromSystem(serialPort: ORSSerialPort) {
         print("Serial port, \(serialPort) was removed from the system.")
+        let arrayObject : [AnyObject] = [false]
+        NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
     }
     
     
@@ -176,6 +191,8 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPort(serialPort: ORSSerialPort, didEncounterError error: NSError) {
         print("Serial port, \(error) was removed from the system.")
+        let arrayObject : [AnyObject] = [false]
+        NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
         
     }
     

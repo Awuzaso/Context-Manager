@@ -196,7 +196,7 @@ DQ
         <scene sceneID="Kbt-mg-0U6">
             <objects>
                 <windowController id="Sen-98-BT2" sceneMemberID="viewController">
-                    <window key="window" title="Debugging Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="FpJ-1v-mv9">
+                    <window key="window" title="Debugging Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" appearanceType="aqua" frameAutosaveName="" animationBehavior="default" id="FpJ-1v-mv9">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="1632" y="1161" width="590" height="570"/>
@@ -246,7 +246,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GF9-GP-JaR">
-                                <rect key="frame" x="54" y="39" width="65" height="19"/>
+                                <rect key="frame" x="54" y="39" width="71" height="19"/>
                                 <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scanner" id="Xu5-k3-aSa">
                                     <font key="font" metaFont="systemBold" size="15"/>
@@ -263,7 +263,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="onEnterTextFieldButton:" target="DDv-9m-YAT" id="Nvn-dg-ayR"/>
+                                    <action selector="onEnterTextFieldButton:" target="crD-dJ-gb9" id="dqm-MA-OUe"/>
                                 </connections>
                             </textField>
                             <scrollView toolTip="Drag and drop any object to associate with the currently opened working domain." fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-8T-JEK">
@@ -281,7 +281,7 @@ DQ
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="259" minWidth="40" maxWidth="1000" id="zba-l9-luE">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Contents of Context">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -328,7 +328,7 @@ DQ
                                 </clipView>
                                 <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.33339933823686929" horizontal="YES" id="FFO-K9-luM">
-                                    <rect key="frame" x="1" y="-16" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="151" width="262" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -344,7 +344,7 @@ DQ
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zar-8B-FbB">
-                                <rect key="frame" x="398" y="420" width="81" height="32"/>
+                                <rect key="frame" x="405" y="436" width="81" height="32"/>
                                 <animations/>
                                 <buttonCell key="cell" type="push" title="Switch" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XaY-Gv-Rvf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -354,11 +354,11 @@ DQ
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="OK_Button:" target="dgQ-rf-eg9" id="1Pt-ho-R1A"/>
+                                    <action selector="switchBetweenContextFunc:" target="crD-dJ-gb9" id="4nK-g7-SB3"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3a-8w-88f">
-                                <rect key="frame" x="79" y="446" width="118" height="32"/>
+                                <rect key="frame" x="14" y="445" width="118" height="32"/>
                                 <animations/>
                                 <buttonCell key="cell" type="push" title="New Context" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v5f-pH-MT6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -368,13 +368,13 @@ DQ
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="OK_Button:" target="dgQ-rf-eg9" id="mdj-8W-u3F"/>
+                                    <action selector="addNewWDButton:" target="crD-dJ-gb9" id="v4h-tF-bfs"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDT-9Q-Vsx">
-                                <rect key="frame" x="417" y="402" width="43" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDT-9Q-Vsx">
+                                <rect key="frame" x="323" y="391" width="256" height="40"/>
                                 <animations/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="wZi-KS-shQ">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Status" id="wZi-KS-shQ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -385,6 +385,26 @@ DQ
                                 <animations/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="xsc-Iw-tLW"/>
                             </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kq-Xs-jl1">
+                                <rect key="frame" x="54" y="39" width="230" height="19"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Scanner" id="Qf6-w8-QJJ">
+                                    <font key="font" metaFont="systemBold" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Su-7Y-gwd">
+                                <rect key="frame" x="158" y="445" width="131" height="32"/>
+                                <animations/>
+                                <buttonCell key="cell" type="push" title="Delete Context" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rno-gs-lC0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteWDButton:" target="crD-dJ-gb9" id="7ac-29-weT"/>
+                                </connections>
+                            </button>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Y1-WD-Hjt">
                                 <rect key="frame" x="20" y="66" width="262" height="374"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="q9E-Mo-aB3">
@@ -400,7 +420,7 @@ DQ
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn editable="NO" width="142.5" minWidth="40" maxWidth="1000" headerToolTip="Click or press enter to rename a working domain." id="D9I-jm-gOu">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Created Contexts">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -425,7 +445,7 @@ DQ
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <action selector="onEnterChangeNameOfWD:" target="XfG-lQ-9wD" id="EFA-Tb-4Bh"/>
+                                                                        <action selector="onEnterChangeNameOfWD:" target="crD-dJ-gb9" id="BN8-Kq-uHC"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -456,7 +476,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DateCellID" misplaced="YES" id="L0F-3Z-w2Q">
-                                                            <rect key="frame" x="147" y="1" width="111.5" height="40"/>
+                                                            <rect key="frame" x="146.5" y="1" width="111.5" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anW-ja-S54">
@@ -490,7 +510,7 @@ DQ
                                 </clipView>
                                 <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.16669966911843465" horizontal="YES" id="a6b-FY-e6N">
-                                    <rect key="frame" x="1" y="-16" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="357" width="260" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -499,7 +519,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="0g0-M6-q4c">
+                                <tableHeaderView key="headerView" hidden="YES" focusRingType="exterior" alphaValue="0.0" id="0g0-M6-q4c">
                                     <rect key="frame" x="0.0" y="0.0" width="260" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
@@ -510,6 +530,10 @@ DQ
                     </view>
                     <connections>
                         <outlet property="debuggingText" destination="miJ-Ap-kkN" id="aDn-GH-0cd"/>
+                        <outlet property="scannerStatus" destination="7kq-Xs-jl1" id="Pzf-4a-q71"/>
+                        <outlet property="statusLabel" destination="rDT-9Q-Vsx" id="uYR-gZ-ODf"/>
+                        <outlet property="tableView" destination="y9m-Lh-PKK" id="PfO-1g-wkW"/>
+                        <outlet property="textField" destination="13i-eK-J3O" id="Mk7-TE-Dc6"/>
                     </connections>
                 </viewController>
                 <customObject id="yUx-a4-ZAb" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1007,7 +1031,7 @@ DQ
             <objects>
                 <viewController id="DDv-9m-YAT" customClass="WorkingDomainController" customModule="workingSetProject_v2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="wNx-Km-6Vb" customClass="dropView" customModule="workingSetProject_v2" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="304" height="453"/>
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="453"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView toolTip="Drag and drop any object to associate with the currently opened working domain." fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1N9-fR-iCh">
@@ -1072,7 +1096,7 @@ DQ
                                 </clipView>
                                 <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="b6O-eW-VHb">
-                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="172" width="262" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -1115,6 +1139,15 @@ DQ
                                     <action selector="EditWD_Button:" target="DDv-9m-YAT" id="oeG-UK-0eK"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-aJ-Iui">
+                                <rect key="frame" x="18" y="164" width="75" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Note:" id="z98-UB-MzR">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField toolTip="Press enter to save any notes typed into the space." verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzK-Ep-ecI">
                                 <rect key="frame" x="20" y="50" width="264" height="106"/>
                                 <animations/>
@@ -1127,28 +1160,19 @@ DQ
                                     <action selector="onEnterTextFieldButton:" target="DDv-9m-YAT" id="QAz-SS-gnr"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-aJ-Iui">
-                                <rect key="frame" x="18" y="164" width="75" height="17"/>
-                                <animations/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Note:" id="z98-UB-MzR">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <animations/>
                     </view>
                     <connections>
                         <outlet property="nameOfWD" destination="xmu-ST-gHH" id="hNh-1a-YVM"/>
                         <outlet property="pathControl" destination="4Gl-QU-llo" id="6Ei-B1-V7b"/>
-                        <outlet property="tableViewWD" destination="E86-8P-LXp" id="ceL-hT-GLS"/>
+                        <outlet property="tableViewWD" destination="E86-8P-LXp" id="Vd9-Qv-8Ih"/>
                         <outlet property="textField" destination="EzK-Ep-ecI" id="kc6-2O-zU2"/>
                     </connections>
                 </viewController>
                 <customObject id="7gi-TJ-HsT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="1022.5"/>
+            <point key="canvasLocation" x="512.5" y="1022.5"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="SwC-pX-hsG">
@@ -1373,7 +1397,7 @@ DQ
                                 </clipView>
                                 <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Ru8-ov-F9w">
-                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="125" width="427" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -1529,7 +1553,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DateCellID" id="6N2-FI-RbB">
-                                                            <rect key="frame" x="183.02209439753381" y="1" width="253" height="17"/>
+                                                            <rect key="frame" x="183" y="1" width="253" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W1W-Rf-xIk">
@@ -1562,8 +1586,8 @@ Gw
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <animations/>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.16669966911929238" horizontal="YES" id="vSS-Jp-GVj">
-                                    <rect key="frame" x="1" y="-16" width="0.0" height="16"/>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="vSS-Jp-GVj">
+                                    <rect key="frame" x="1" y="140" width="438" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>

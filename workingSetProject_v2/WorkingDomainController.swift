@@ -39,6 +39,10 @@ class WorkingDomainController: NSViewController {
     var sortOrder = Directory.FileOrder.Name
     var sortAscending = true
 
+    
+   
+    
+    
     func setNoteTable(){
         
         

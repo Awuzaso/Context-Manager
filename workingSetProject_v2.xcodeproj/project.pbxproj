@@ -40,6 +40,9 @@
 		4CF507651D2C28D600B3ED7D /* User_Pref_Manager_Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF507641D2C28D600B3ED7D /* User_Pref_Manager_Class.swift */; };
 		4CF507681D2C582E00B3ED7D /* UnAssociated_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF507661D2C582E00B3ED7D /* UnAssociated_View.swift */; };
 		4CF5C6441D4807BC00343D57 /* WorkingDomainController_DragExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5C6431D4807BC00343D57 /* WorkingDomainController_DragExt.swift */; };
+		B980E0241DEFF6CD00DD22E6 /* debuggingWindow_Ext_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980E0231DEFF6CD00DD22E6 /* debuggingWindow_Ext_1.swift */; settings = {ASSET_TAGS = (); }; };
+		B980E0261DEFF6DF00DD22E6 /* debuggingWindow_Ext_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980E0251DEFF6DF00DD22E6 /* debuggingWindow_Ext_2.swift */; settings = {ASSET_TAGS = (); }; };
+		B980E0281DEFF6F700DD22E6 /* debuggingWindow_Ext_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980E0271DEFF6F700DD22E6 /* debuggingWindow_Ext_3.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		4CF507641D2C28D600B3ED7D /* User_Pref_Manager_Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User_Pref_Manager_Class.swift; sourceTree = "<group>"; };
 		4CF507661D2C582E00B3ED7D /* UnAssociated_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnAssociated_View.swift; sourceTree = "<group>"; };
 		4CF5C6431D4807BC00343D57 /* WorkingDomainController_DragExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingDomainController_DragExt.swift; sourceTree = "<group>"; };
+		B980E0231DEFF6CD00DD22E6 /* debuggingWindow_Ext_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debuggingWindow_Ext_1.swift; sourceTree = "<group>"; };
+		B980E0251DEFF6DF00DD22E6 /* debuggingWindow_Ext_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debuggingWindow_Ext_2.swift; sourceTree = "<group>"; };
+		B980E0271DEFF6F700DD22E6 /* debuggingWindow_Ext_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debuggingWindow_Ext_3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,7 @@
 				4C723AC31D29764B00E3CB51 /* workingSetManager */,
 				4C723ABF1D2972F700E3CB51 /* Supporting Resources */,
 				4CCA62B31D610C55001CEA70 /* debuggingWindow.swift */,
+				B980E0221DEFF4EC00DD22E6 /* SupportForDebugWindow */,
 			);
 			path = workingSetProject_v2;
 			sourceTree = "<group>";
@@ -172,8 +179,8 @@
 		4C723ADA1D297AED00E3CB51 /* serialPortManager */ = {
 			isa = PBXGroup;
 			children = (
-				4C723AC81D297AC700E3CB51 /* workingSetProject_v2-Bridging-Header.h */,
 				4C723AD31D297AC800E3CB51 /* Serial_Port_Manager_Class.swift */,
+				4C723AC81D297AC700E3CB51 /* workingSetProject_v2-Bridging-Header.h */,
 				4C723ADB1D297B0000E3CB51 /* ORSSerialPort */,
 			);
 			name = serialPortManager;
@@ -272,6 +279,16 @@
 			name = UnAssociatedViewController;
 			sourceTree = "<group>";
 		};
+		B980E0221DEFF4EC00DD22E6 /* SupportForDebugWindow */ = {
+			isa = PBXGroup;
+			children = (
+				B980E0231DEFF6CD00DD22E6 /* debuggingWindow_Ext_1.swift */,
+				B980E0251DEFF6DF00DD22E6 /* debuggingWindow_Ext_2.swift */,
+				B980E0271DEFF6F700DD22E6 /* debuggingWindow_Ext_3.swift */,
+			);
+			name = SupportForDebugWindow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -344,6 +361,7 @@
 			files = (
 				4CA939691D55163600495ACB /* CoreDataClass_CSV_generator.swift in Sources */,
 				4CF507651D2C28D600B3ED7D /* User_Pref_Manager_Class.swift in Sources */,
+				B980E0261DEFF6DF00DD22E6 /* debuggingWindow_Ext_2.swift in Sources */,
 				4CC51E821D35929A003BBD04 /* dropView.swift in Sources */,
 				4C723ADF1D2B0CBF00E3CB51 /* WindowController.swift in Sources */,
 				4C2522AA1D442C320040A640 /* EditWorkingDomainController.swift in Sources */,
@@ -363,11 +381,13 @@
 				4CF507681D2C582E00B3ED7D /* UnAssociated_View.swift in Sources */,
 				4C723AD81D297AC800E3CB51 /* ORSSerialRequest.m in Sources */,
 				4CF5C6441D4807BC00343D57 /* WorkingDomainController_DragExt.swift in Sources */,
+				B980E0281DEFF6F700DD22E6 /* debuggingWindow_Ext_3.swift in Sources */,
 				4C723AD91D297AC800E3CB51 /* Serial_Port_Manager_Class.swift in Sources */,
 				4C9312661D31BDFD0000F252 /* Directory.swift in Sources */,
 				4CD086A51D31C92600686ED7 /* WorkingDomainController_Ext.swift in Sources */,
 				4C3A66AD1D511FD500653D66 /* AppDelegate_Ext.swift in Sources */,
 				4C723ABE1D2972CD00E3CB51 /* CoreDataClass.swift in Sources */,
+				B980E0241DEFF6CD00DD22E6 /* debuggingWindow_Ext_1.swift in Sources */,
 				4C723AAB1D2966CB00E3CB51 /* workingSetManagerViewController.swift in Sources */,
 				4CA939671D5419FA00495ACB /* EditWorkingDomainController_Ext.swift in Sources */,
 				4C723AD51D297AC800E3CB51 /* ORSSerialPacketDescriptor.m in Sources */,
