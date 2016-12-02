@@ -146,29 +146,6 @@ extension WorkingDomainController : NSTableViewDataSource {
         let spec = contentsOfWD[0]
         let list = spec.mutableSetValueForKey("associatedFiles")
         
-        //print("Count of items is: \(list.count)")
-        //*/
-        
-        
-        
-        /*
-        //1
-        let managedContext = singleton.coreDataObject.managedObjectContext
-        //2
-        let fetchRequest = NSFetchRequest(entityName: "WorkingDomain")
-        //3
-        do {
-            let results =
-                try managedContext.executeFetchRequest(fetchRequest)
-            contentsOfWD = results as! [NSManagedObject]
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        */
-        
-        
-        
-        //return contentsOfWD.count ?? 0
         return list.count ?? 0
     }
     
