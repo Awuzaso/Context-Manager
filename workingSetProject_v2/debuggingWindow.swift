@@ -35,18 +35,12 @@ class debuggingWindow: NSViewController {
     
     /*Outlets for Table View*/
     @IBOutlet weak var statusLabel: NSTextField!
-    
+    @IBOutlet weak var pathControl: NSPathControl!
+
     
     @IBOutlet weak var scannerStatus: NSTextField!
     
     /*Outlet for tableview for content.*/
-    
-    
-    
-    /*Outlets for Buttons*/
-    @IBOutlet weak var openWDButton: NSButton!
-    @IBOutlet weak var associateWDButton: NSButton!
-    @IBOutlet weak var deleteWDButton: NSButton!
     
     
     @IBOutlet weak var textField: NSTextField!
@@ -57,15 +51,6 @@ class debuggingWindow: NSViewController {
         tableViewWD!.setDataSource(self)
         tableViewWD!.target = self
         tableViewWD.doubleAction = "tableViewDoubleClick:"
-        
-        
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveNameChange_Button:",name:"updateWD", object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rmvFile",name:"remove", object: nil)
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveName",name:"saver", object: nil)
-        
-        
     }
 
     
@@ -100,6 +85,28 @@ class debuggingWindow: NSViewController {
     }
 
     
+    func openPath(){
+        
+        let tval = pathControl.clickedPathComponentCell()?.URL?.filePathURL
+        
+        let nval = (tval?.relativePath)! as String
+        
+        //print( nval )
+        
+        
+        let value = (pathControl.clickedPathComponentCell()?.URL?.relativeString)! as String
+        //print( value )
+        let openWindowObject = windowManager()
+        
+        let filePath:String!
+        
+        
+        filePath = value
+        
+        
+        NSWorkspace.sharedWorkspace().selectFile(nil, inFileViewerRootedAtPath: nval)
+    }
+
     
     /*Function for toggling between off and on state of buttons.*/
     func switchOnOffButtons(openActive:Bool,deleteActive:Bool,associateActive:Bool){
@@ -170,6 +177,15 @@ class debuggingWindow: NSViewController {
         setScannerStatus()
         
         setNoteTable()
+        pathControl.doubleAction = "openPath"
+//        
+        let registeredTypes:[String] = [NSStringPboardType]
+        tableViewWD.registerForDraggedTypes(registeredTypes)
+        NSLog(tableViewWD.registeredDraggedTypes.description)
+//
+               //print("Working.")
+
+        
         
         
         let nameDesc = "Name"
@@ -209,7 +225,7 @@ class debuggingWindow: NSViewController {
     
     
     func updateTableViewWD(){
-        print("Update.")
+        //print("Update.")
     self.reloadFileListWD()
     self.tableViewWD!.reloadData()
     }
@@ -249,7 +265,7 @@ class debuggingWindow: NSViewController {
     }
     
     func launchAssociatedWindow(notification: NSNotification){
-        print("Launch!")
+       // print("Launch!")
         // 1 - Setting window object.
         let openWindowObject = windowManager()
         openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
@@ -265,7 +281,7 @@ class debuggingWindow: NSViewController {
     
     
     @IBAction func onEnterChangeNameOfWD(sender: NSTextField) {
-        print("Name changed.")
+       // print("Name changed.")
         
         if(nameOfWS != nil){
             singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "nameOfWD", idName: nameOfWS, editName: sender.stringValue)
@@ -300,7 +316,7 @@ class debuggingWindow: NSViewController {
     
     @IBAction func onEnterTextFieldButton(sender: NSTextField) {
         if(nameOfWS != nil){
-        print("Note saved!")
+        //print("Note saved!")
         
         statusLabel.stringValue = "Annotation for " + nameOfWS + " was saved."
         
@@ -313,7 +329,7 @@ class debuggingWindow: NSViewController {
     // MARK: - Button Actions
     
     @IBAction func addNewWDButton(sender: AnyObject) {
-        print("'Add new button' was pressed.")
+       // print("'Add new button' was pressed.")
         
         
         var iter = 1
@@ -321,7 +337,7 @@ class debuggingWindow: NSViewController {
         var potentialName = "Untitled Working Domain \(iter)"
         
         var ifInDB = singleton.coreDataObject.evaluateIfInDB("WorkingDomain", nameOfKey: "nameOfWD", nameOfObject: potentialName)
-        print("Evaluated as \(ifInDB)")
+        //print("Evaluated as \(ifInDB)")
         while(ifInDB == true){
             
             iter = iter + 1
@@ -347,28 +363,17 @@ class debuggingWindow: NSViewController {
         reloadFileList()
     }
     
-    
-    @IBAction func openWDButton(sender: AnyObject) {
-        print("'Open button' was pressed.")
+    func rmvFile(){
+        singleton.coreDataObject.deleteEntityObject("File", nameOfKey: "nameOfFile", nameOfObject: selectedFile)
         
-        singleton.openedWD = nameOfWS
-        singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "dateLastAccessed", idName: singleton.openedWD, editName: singleton.getDate("EEEE, MMMM dd, yyyy, HH:mm:ss"))
-        reloadFileList()
-        print( singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: singleton.openedWD) )
-        
-        // 1 - Setting window object.
-        let openWindowObject = windowManager()
-        openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
-        // 2 - Setting the values of the window object.
-        windowController = openWindowObject.get_windowController()
-        let openWindowViewController = windowController!.contentViewController as! WorkingDomainController
-        
-        
-        // 3 - Initiate the window.
-        NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
-        windowController!.showWindow(sender)
-        
+        self.reloadFileList()
+        updateTableViewWD()
     }
+    
+    @IBAction func removeFileFromContext(sender: AnyObject) {
+        rmvFile()
+    }
+    
     
     @IBAction func deleteWDButton(sender: AnyObject) {
         
@@ -387,10 +392,16 @@ class debuggingWindow: NSViewController {
         }
     }
     
+    
+ 
+    
     func AW_notif(){
         print("Associating...")
         nameOfWS = singleton.openedWD
         AssociateWDButton()
+    }
+    @IBAction func delFromContext(sender: AnyObject) {
+        statusLabel.stringValue = "A file was deleted from " + nameOfWS
     }
     
     
@@ -427,13 +438,13 @@ extension debuggingWindow : NSTableViewDataSource {
         setNoteTable()
         
         // 3 - When a working set is seleted from the table view, launch window buttons are then made available to be pressed.
-        switchOnOffButtons(true,deleteActive: true,associateActive: false)
+        //switchOnOffButtons(true,deleteActive: true,associateActive: false)
     }
     
     
     func getItemSelected_String(tableView :NSTableView)->String{
         
-        
+        if(tableView == tableViewWD){
             let fetchedWD:NSManagedObject!
             
             
@@ -489,47 +500,71 @@ extension debuggingWindow : NSTableViewDataSource {
             
             
             return item
+        }
         
+        return " "
     }
 
     
     
     func updateStatusWD(){
+        print("A file is being selected.")
+        
+        print(tableViewWD.selectedRow)
+        ///*
         if(tableViewWD.selectedRow != -1){
+            print("Next")
             selectedFile =  getItemSelected_String(tableViewWD)
             directoryPath = singleton.coreDataObject.getValueOfEntityObject("File", idKey: "nameOfFile", nameOfKey: "nameOfPath", nameOfObject: selectedFile)
             let fileURL = NSURL(fileURLWithPath: directoryPath)
             
             
+            print(selectedFile + " was selected.")
+            
             print(fileURL)
-            //pathControl.URL = fileURL
-        }
+            pathControl.URL = fileURL
+        }//*/
     }
     
     
     func tableViewDoubleClick(sender: AnyObject) {
         
-        if(nameOfWS != nil){
-            singleton.openedWD = nameOfWS
-            //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
-            print("Hitting.")
-            //self.openWDButton(self)    <----- THIS IS WHERE WE PUT THE CODE TO OPEN THE CONTEXT CONTENT
+//        if(nameOfWS != nil){
+//            singleton.openedWD = nameOfWS
+//            //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
+//            print("Hitting.")
+//            //self.openWDButton(self)    <----- THIS IS WHERE WE PUT THE CODE TO OPEN THE CONTEXT CONTENT
+//            
+//           
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//        }
+//        else{
+//            print("Nothing is selected.")
+//            //openWDButton.enabled = false
+//        }
+//        
+//        //print("Hit")
+        print("A file was double clicked.")
+        if(selectedFile != nil){
+            print("Double click for \(selectedFile)")
             
-           
+            statusLabel.stringValue = selectedFile + " was opened."
+            let openWindowObject = windowManager()
+            
+            let filePath:String!
             
             
+            filePath = singleton.coreDataObject.getValueOfEntityObject("File", idKey: "nameOfFile", nameOfKey: "nameOfPath", nameOfObject: selectedFile)
+            print (filePath)
             
-            
-            
-            
-            
+            NSWorkspace.sharedWorkspace().selectFile(nil, inFileViewerRootedAtPath: filePath)
         }
-        else{
-            print("Nothing is selected.")
-            //openWDButton.enabled = false
-        }
-        
-        //print("Hit")
 
         
     }
@@ -559,7 +594,7 @@ extension debuggingWindow : NSTableViewDataSource {
             
             
             if(nameOfWS != nil){
-                print("Getting count")
+                //print("Getting count")
                 ///*
                 let fetchedWD:NSManagedObject!
                 
@@ -618,7 +653,7 @@ extension debuggingWindow : NSTableViewDataSource {
     
     // Function sets the sorting schema, then calls on "reloadFileList()" to actually change table view.
     func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        print("Starting sort.")
+        //print("Starting sort.")
         if(tableView == self.tableView){
             
         }
@@ -634,10 +669,14 @@ extension debuggingWindow : NSTableViewDataSource {
 extension debuggingWindow : NSTableViewDelegate {
     
     func tableViewSelectionDidChange(notification: NSNotification) {
+       let myTableViewFromNotification = notification.object as! NSTableView
         
+        if(myTableViewFromNotification == tableView){
         updateStatus()
-        print("This is working.")
+        }
+        else if(myTableViewFromNotification == tableViewWD){
         updateStatusWD()
+        }
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -689,6 +728,10 @@ extension debuggingWindow : NSTableViewDelegate {
         else if(tableView == tableViewWD){
             
             
+            var image: NSImage?
+            
+            
+            
             let fetchedWD:NSManagedObject!
             
             
@@ -732,9 +775,7 @@ extension debuggingWindow : NSTableViewDelegate {
             
             //Dummy Value
             
-            
-            print("This is how many files are associated with a context:")
-            print( list.count )
+           
             
             
             var associatedObjects : [String] = []
@@ -759,7 +800,7 @@ extension debuggingWindow : NSTableViewDelegate {
                 
                 for i in list{
                     let item = i.valueForKey("nameOfFile") as! String
-                    print( item )
+                    //print( item )
                     
                     associatedObjects.append(item)
                 }
@@ -776,10 +817,15 @@ extension debuggingWindow : NSTableViewDelegate {
                    text = value //value! <--- ADD
                    //text = "Value"
                     cellIdentifier = "NameCellID"
-                } /*else if tableColumn == tableView.tableColumns[1] {
-                text = "Value"
-                cellIdentifier = "DateCellID"
-                }*/
+                }
+               
+                else if tableColumn == tableView.tableColumns[1] {
+                
+                    
+                    
+                text = "Delete"
+                cellIdentifier = "DelCellID"
+                }   
                 
                 // 7 - Fill cell content.
                 if let cell = tableView.makeViewWithIdentifier(cellIdentifier, owner: nil) as? NSTableCellView {

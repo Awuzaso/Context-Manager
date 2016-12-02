@@ -40,6 +40,7 @@
 		4CF507651D2C28D600B3ED7D /* User_Pref_Manager_Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF507641D2C28D600B3ED7D /* User_Pref_Manager_Class.swift */; };
 		4CF507681D2C582E00B3ED7D /* UnAssociated_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF507661D2C582E00B3ED7D /* UnAssociated_View.swift */; };
 		4CF5C6441D4807BC00343D57 /* WorkingDomainController_DragExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5C6431D4807BC00343D57 /* WorkingDomainController_DragExt.swift */; };
+		B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */; settings = {ASSET_TAGS = (); }; };
 		B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		4CF507641D2C28D600B3ED7D /* User_Pref_Manager_Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User_Pref_Manager_Class.swift; sourceTree = "<group>"; };
 		4CF507661D2C582E00B3ED7D /* UnAssociated_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnAssociated_View.swift; sourceTree = "<group>"; };
 		4CF5C6431D4807BC00343D57 /* WorkingDomainController_DragExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingDomainController_DragExt.swift; sourceTree = "<group>"; };
+		B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contextManagerWindowController.swift; sourceTree = "<group>"; };
 		B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dropViewForContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */,
+				B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */,
 			);
 			name = SupportForDebugWindow;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				4CE737331D4457B800FDF6F9 /* WorkingDomainWindow.swift in Sources */,
 				4C723AE81D2B871B00E3CB51 /* Edit_User_Settings_Window.swift in Sources */,
 				4C723AE51D2B838B00E3CB51 /* WorkingDomainController.swift in Sources */,
+				B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */,
 				4C723AD41D297AC800E3CB51 /* ORSSerialBuffer.m in Sources */,
 				B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */,
 				4C723AC21D29743000E3CB51 /* CoreDataClass_Ext.swift in Sources */,

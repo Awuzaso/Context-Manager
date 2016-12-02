@@ -35,13 +35,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // PRIMARY FUNCTIONS
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        
+        
+        
         // - 1 Calls function to initialize values for app.
         print("Initializing App")
         
         initializeApp()
         
         print("Hello.")
-        var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "event", userInfo: nil, repeats: true)
+        //var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "event", userInfo: nil, repeats: true)
         
         
         //print( singleton.serialPortObject.serialPortManager.availablePorts )
