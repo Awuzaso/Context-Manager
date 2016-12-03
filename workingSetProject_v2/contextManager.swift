@@ -58,14 +58,6 @@ class contextManager: NSViewController {
         tableViewWD!.target = self
         tableViewWD.doubleAction = "tableViewDoubleClick:"
     }
-
-    
-    
-   
-
-    
-   
-    
     
     func setNoteTable(){
         
@@ -220,6 +212,19 @@ class contextManager: NSViewController {
         setupTableView()
         
         
+        let options = CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenOnly)
+        
+        let windowListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
+        
+        let infoList = windowListInfo as NSArray? as? [[String: AnyObject]]
+        
+        
+        
+        print(infoList)
+        
+        
+        //tableViewWD.hidden = true
+
     }
     
     override func awakeFromNib() {
@@ -309,9 +314,20 @@ class contextManager: NSViewController {
     }
     
     
+    @IBAction func connectToScanner(sender: AnyObject) {
+        singleton.serialPortObject.openSerialPort()
+        
+    }
+    
+    
     @IBAction func switchBetweenContextFunc(sender: AnyObject) {
         
         if(currentContext != nil){
+            
+            //singleton.coreDataObject.getEntityObject("File", idKey: selectedFile , idName: currentContext)
+            
+            NSWorkspace.sharedWorkspace().openFile("/Users/osazuwaokundaye/Downloads/ICIDS2016-Draft3-2.doc", withApplication: "/Applications/Preview.app")
+            
             statusLabel.stringValue = "The context was switched to " + currentContext
         }
         

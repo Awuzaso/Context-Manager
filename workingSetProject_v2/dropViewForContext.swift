@@ -35,6 +35,8 @@ class dropViewForContext: NSView {
     }
     
     override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+        
+        if(singleton.openedWD != nil){
         if let pasteboard = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
             if let path = pasteboard[0] as? String {
                 //Swift.print(path)
@@ -44,6 +46,7 @@ class dropViewForContext: NSView {
                 return NSDragOperation.Copy
                 //}
             }
+        }
         }
         return NSDragOperation.None
     }

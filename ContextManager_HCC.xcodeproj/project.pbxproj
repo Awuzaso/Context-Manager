@@ -26,11 +26,11 @@
 		4CA939691D55163600495ACB /* CoreDataClass_CSV_generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA939681D55163600495ACB /* CoreDataClass_CSV_generator.swift */; };
 		4CCA62B41D610C55001CEA70 /* contextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA62B31D610C55001CEA70 /* contextManager.swift */; };
 		4CD075E61D3D8DD8009DAE45 /* workingSetProject_v2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CD075E41D3D8DD8009DAE45 /* workingSetProject_v2.xcdatamodeld */; };
-		B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */; settings = {ASSET_TAGS = (); }; };
-		B913B2AF1DF33DD9004DEED2 /* tableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913B2AE1DF33DD9004DEED2 /* tableViewManager.swift */; settings = {ASSET_TAGS = (); }; };
-		B913B2B21DF347E8004DEED2 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = B913B2B01DF347E8004DEED2 /* switch.png */; settings = {ASSET_TAGS = (); }; };
-		B913B2B31DF347E8004DEED2 /* add_context1.png in Resources */ = {isa = PBXBuildFile; fileRef = B913B2B11DF347E8004DEED2 /* add_context1.png */; settings = {ASSET_TAGS = (); }; };
-		B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */; settings = {ASSET_TAGS = (); }; };
+		B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */; };
+		B913B2AF1DF33DD9004DEED2 /* tableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913B2AE1DF33DD9004DEED2 /* tableViewManager.swift */; };
+		B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */; };
+		D17879951DF36444009C904D /* add_context1.png in Resources */ = {isa = PBXBuildFile; fileRef = D17879931DF36444009C904D /* add_context1.png */; };
+		D17879961DF36444009C904D /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = D17879941DF36444009C904D /* switch.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,9 +63,9 @@
 		4CD075E51D3D8DD8009DAE45 /* workingSetProject_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = workingSetProject_v2.xcdatamodel; sourceTree = "<group>"; };
 		B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contextManagerWindowController.swift; sourceTree = "<group>"; };
 		B913B2AE1DF33DD9004DEED2 /* tableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableViewManager.swift; sourceTree = "<group>"; };
-		B913B2B01DF347E8004DEED2 /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch.png; path = "../../../Downloads/Dec 03, 2.54 AM/Context-Manager-master/workingSetProject_v2/switch.png"; sourceTree = "<group>"; };
-		B913B2B11DF347E8004DEED2 /* add_context1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_context1.png; path = "../../../Downloads/Dec 03, 2.54 AM/Context-Manager-master/workingSetProject_v2/add_context1.png"; sourceTree = "<group>"; };
 		B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dropViewForContext.swift; sourceTree = "<group>"; };
+		D17879931DF36444009C904D /* add_context1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_context1.png; sourceTree = "<group>"; };
+		D17879941DF36444009C904D /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +121,8 @@
 				4C723AC01D29731400E3CB51 /* coreDataManager */,
 				4C723AE01D2B7BF600E3CB51 /* windowManager */,
 				4C723AAF1D2966CB00E3CB51 /* Assets.xcassets */,
-				B913B2B01DF347E8004DEED2 /* switch.png */,
-				B913B2B11DF347E8004DEED2 /* add_context1.png */,
+				D17879931DF36444009C904D /* add_context1.png */,
+				D17879941DF36444009C904D /* switch.png */,
 				4C723AB11D2966CB00E3CB51 /* Main.storyboard */,
 				4C723AB41D2966CB00E3CB51 /* Info.plist */,
 				4CD075E41D3D8DD8009DAE45 /* workingSetProject_v2.xcdatamodeld */,
@@ -264,8 +264,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B913B2B21DF347E8004DEED2 /* switch.png in Resources */,
-				B913B2B31DF347E8004DEED2 /* add_context1.png in Resources */,
+				D17879951DF36444009C904D /* add_context1.png in Resources */,
+				D17879961DF36444009C904D /* switch.png in Resources */,
 				4C723AB01D2966CB00E3CB51 /* Assets.xcassets in Resources */,
 				4C723AB31D2966CB00E3CB51 /* Main.storyboard in Resources */,
 			);

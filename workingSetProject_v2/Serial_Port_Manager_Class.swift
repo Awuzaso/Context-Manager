@@ -52,7 +52,7 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
             serialPort = ORSSerialPort(path: "\(tpathName)")
         }
         else{
-            print("Ready.")
+            print("Serial Port is Ready.")
         }
         
         serialPort?.delegate = self
@@ -61,6 +61,10 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
         
         serialPort!.open()
        
+    }
+    
+    func openSerialPort(){
+        serialPort.open()
     }
     
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
@@ -101,7 +105,7 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPortWasOpened(serialPort: ORSSerialPort) {
         print("Open!")
-        let arrayObject : [AnyObject] = [false]
+        let arrayObject : [AnyObject] = [true]
         NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
 
         
@@ -119,7 +123,7 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
     
     /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
     func serialPort(serialPort: ORSSerialPort, didReceivePacket packetData: NSData, matchingDescriptor descriptor: ORSSerialPacketDescriptor) {
-        
+        print("reading...")
         let arrayObject : [AnyObject] = [true]
         NSNotificationCenter.defaultCenter().postNotificationName("scanSet", object: arrayObject)
         
@@ -138,18 +142,22 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
             
             // - Case if card is in data base.
                 if(cardIsInDB == false){
+                    print("Card is not in the database.")
                     // - Brings up a modal window to tell user that the card is a new to the database.
-                    if(singleton.canOpenAssocWindow == true){
-                        singleton.openWindowObject.setWindow("Main", nameOfWindowController: "UAWindow")
-                        singleton.openWindowObject.runModalWindow()
-                    }
+//                    if(singleton.canOpenAssocWindow == true){
+//                        singleton.openWindowObject.setWindow("Main", nameOfWindowController: "UAWindow")
+//                        singleton.openWindowObject.runModalWindow()
+//                    }
+                    
+                    
+                    
                     
                     singleton.readCard = singleton.coreDataObject.getEntityObject("Card", idKey: "rfidValue", idName: sendVal)
                     NSNotificationCenter.defaultCenter().postNotificationName("enableAssoc", object: nil)
                 }
             // - Case if card read is in the data base.
                 else{
-                    
+                    print("Card is in the database.")
                     // - Assigns the value of the currently read card.
                         singleton.readCard = singleton.coreDataObject.getEntityObject("Card", idKey: "rfidValue", idName: sendVal)
                         //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
