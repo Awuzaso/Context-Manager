@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class debuggingWindow: NSViewController {
+class contextManager: NSViewController {
 
     
     var iteration = 0
@@ -24,23 +24,29 @@ class debuggingWindow: NSViewController {
     
     
     /*Variables*/
-    var nameOfWS: String! //Selected WS
+    var currentContext: String! //Selected WS
     var workingSets = [NSManagedObject]() //Stores instances of entity 'Working-Set'
     var contentsOfWD = [NSManagedObject]() //Stores instances of entity 'Working-Set'
     var directoryPath:String!
     var selectedFile:String!
     
+    
+    
+    /*Outlets for Context View (Left-hand side tableview.)*/
+    @IBOutlet weak var tableView: NSTableView!
+    
+    /*Outlet for tableview for content. (Left-hand side tableview.)*/
     @IBOutlet weak var tableViewWD: NSTableView!
    
     
-    /*Outlets for Table View*/
+    
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var pathControl: NSPathControl!
 
     
     @IBOutlet weak var scannerStatus: NSTextField!
     
-    /*Outlet for tableview for content.*/
+    
     
     
     @IBOutlet weak var textField: NSTextField!
@@ -63,9 +69,9 @@ class debuggingWindow: NSViewController {
     
     func setNoteTable(){
         
-        if(nameOfWS != nil){
+        if(currentContext != nil){
         
-            let wd = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: nameOfWS)
+            let wd = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: currentContext)
             
             
             
@@ -152,13 +158,12 @@ class debuggingWindow: NSViewController {
         if let myDict = notification.object as? [String:AnyObject] {
             
             if let myText = myDict["myText"] as? String {
-                statusLabel.stringValue = myText + " was added to " + nameOfWS
+                statusLabel.stringValue = myText + " was added to " + currentContext
 
             }
         }
     }
     
-    @IBOutlet weak var tableView: NSTableView!
     
     /*Set-up View*/
     override func viewDidLoad() {
@@ -264,39 +269,39 @@ class debuggingWindow: NSViewController {
         self.reloadFileList()
     }
     
-    func launchAssociatedWindow(notification: NSNotification){
-       // print("Launch!")
-        // 1 - Setting window object.
-        let openWindowObject = windowManager()
-        openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
-        // 2 - Setting the values of the window object.
-        windowController = openWindowObject.get_windowController()
-        let openWindowViewController = windowController!.contentViewController as! WorkingDomainController
-        
-        
-        
-        // 3 - Initiate the window.
-        windowController!.showWindow(nil)
-    }
+//    func launchAssociatedWindow(notification: NSNotification){
+//       // print("Launch!")
+//        // 1 - Setting window object.
+//        let openWindowObject = windowManager()
+//        openWindowObject.setWindow("Main",nameOfWindowController: "AWindow")
+//        // 2 - Setting the values of the window object.
+//        windowController = openWindowObject.get_windowController()
+//        let openWindowViewController = windowController!.contentViewController as! WorkingDomainController
+//        
+//        
+//        
+//        // 3 - Initiate the window.
+//        windowController!.showWindow(nil)
+//    }
     
     
     @IBAction func onEnterChangeNameOfWD(sender: NSTextField) {
        // print("Name changed.")
         
-        if(nameOfWS != nil){
-            singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "nameOfWD", idName: nameOfWS, editName: sender.stringValue)
+        if(currentContext != nil){
+            singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "nameOfWD", idName: currentContext, editName: sender.stringValue)
             //NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
             
             singleton.openedWD = sender.stringValue
             //NSNotificationCenter.defaultCenter().postNotificationName("saver", object: nil)
             
             
-            singleton.coreDataObject.editEntityObject("WorkingDomain", nameOfKey: "nameOfWD", oldName: nameOfWS, editName: sender.stringValue)
+            singleton.coreDataObject.editEntityObject("WorkingDomain", nameOfKey: "nameOfWD", oldName: currentContext, editName: sender.stringValue)
             
-            statusLabel.stringValue = "Context's name, " + nameOfWS + ", was changed to " + sender.stringValue
+            statusLabel.stringValue = "Context's name, " + currentContext + ", was changed to " + sender.stringValue
             
-            nameOfWS = sender.stringValue
-            singleton.openedWD = nameOfWS
+            currentContext = sender.stringValue
+            singleton.openedWD = currentContext
             
             tableView.reloadData()
         }
@@ -306,8 +311,8 @@ class debuggingWindow: NSViewController {
     
     @IBAction func switchBetweenContextFunc(sender: AnyObject) {
         
-        if(nameOfWS != nil){
-            statusLabel.stringValue = "The context was switched to " + nameOfWS
+        if(currentContext != nil){
+            statusLabel.stringValue = "The context was switched to " + currentContext
         }
         
         
@@ -315,12 +320,12 @@ class debuggingWindow: NSViewController {
     }
     
     @IBAction func onEnterTextFieldButton(sender: NSTextField) {
-        if(nameOfWS != nil){
+        if(currentContext != nil){
         //print("Note saved!")
         
-        statusLabel.stringValue = "Annotation for " + nameOfWS + " was saved."
+        statusLabel.stringValue = "Annotation for " + currentContext + " was saved."
         
-        singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "noteForWD", idName: nameOfWS, editName: sender.stringValue)
+        singleton.coreDataObject.setValueOfEntityObject("WorkingDomain", idKey: "nameOfWD", nameOfKey: "noteForWD", idName: currentContext, editName: sender.stringValue)
         }
         
     }
@@ -377,14 +382,14 @@ class debuggingWindow: NSViewController {
     
     @IBAction func deleteWDButton(sender: AnyObject) {
         
-        if(nameOfWS != nil){
+        if(currentContext != nil){
             print("Delete.")
-            statusLabel.stringValue = nameOfWS + " was deleted."
+            statusLabel.stringValue = currentContext + " was deleted."
         
-            singleton.coreDataObject.deleteEntityObject("WorkingDomain", nameOfKey: "nameOfWD", nameOfObject: nameOfWS)
+            singleton.coreDataObject.deleteEntityObject("WorkingDomain", nameOfKey: "nameOfWD", nameOfObject: currentContext)
             reloadFileList()
             
-            nameOfWS = nil
+            currentContext = nil
             
             setNoteTable()
             
@@ -397,18 +402,22 @@ class debuggingWindow: NSViewController {
     
     func AW_notif(){
         print("Associating...")
-        nameOfWS = singleton.openedWD
+        currentContext = singleton.openedWD
         AssociateWDButton()
     }
     @IBAction func delFromContext(sender: AnyObject) {
-        statusLabel.stringValue = "A file was deleted from " + nameOfWS
+        statusLabel.stringValue = "A file was deleted from " + currentContext
     }
     
     
     
     func AssociateWDButton() {
         
-        let openedWD = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: singleton.openedWD)
+//        let openedWD = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: singleton.openedWD)
+//        
+//        singleton.coreDataObject.createRelationship(openedWD, objectTwo: singleton.readCard, relationshipType: "associatedCard")
+        
+        let openedWD = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: currentContext)
         
         singleton.coreDataObject.createRelationship(openedWD, objectTwo: singleton.readCard, relationshipType: "associatedCard")
         
@@ -416,7 +425,7 @@ class debuggingWindow: NSViewController {
 
 }
 
-extension debuggingWindow : NSTableViewDataSource {
+extension contextManager : NSTableViewDataSource {
     
     
     /*This function is called everytime there is a change in the table view.*/
@@ -431,9 +440,9 @@ extension debuggingWindow : NSTableViewDataSource {
         
         
         
-        nameOfWS =  launchWindowTable.getItemSelected_String(tableView, managedObjectArray: workingSets, objectAttr: "nameOfWD")
-        singleton.openedWD = nameOfWS
-        statusLabel.stringValue = nameOfWS + " is selected."
+        currentContext =  launchWindowTable.getItemSelected_String(tableView, managedObjectArray: workingSets, objectAttr: "nameOfWD")
+        singleton.openedWD = currentContext
+        statusLabel.stringValue = currentContext + " is selected."
         tableViewWD.reloadData()
         setNoteTable()
         
@@ -460,7 +469,7 @@ extension debuggingWindow : NSTableViewDataSource {
             //let predicate = NSPredicate(format: "nameOfWD",loadedWDName)
             
             
-            let predicate = NSPredicate(format: "%K == %@","nameOfWD",nameOfWS)
+            let predicate = NSPredicate(format: "%K == %@","nameOfWD",currentContext)
             
             
             fetchRequest.predicate = predicate
@@ -529,8 +538,8 @@ extension debuggingWindow : NSTableViewDataSource {
     
     func tableViewDoubleClick(sender: AnyObject) {
         
-//        if(nameOfWS != nil){
-//            singleton.openedWD = nameOfWS
+//        if(currentContext != nil){
+//            singleton.openedWD = currentContext
 //            //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
 //            print("Hitting.")
 //            //self.openWDButton(self)    <----- THIS IS WHERE WE PUT THE CODE TO OPEN THE CONTEXT CONTENT
@@ -593,7 +602,7 @@ extension debuggingWindow : NSTableViewDataSource {
             
             
             
-            if(nameOfWS != nil){
+            if(currentContext != nil){
                 //print("Getting count")
                 ///*
                 let fetchedWD:NSManagedObject!
@@ -611,7 +620,7 @@ extension debuggingWindow : NSTableViewDataSource {
                 //let predicate = NSPredicate(format: "nameOfWD",loadedWDName)
                 
                 
-                let predicate = NSPredicate(format: "%K == %@","nameOfWD",nameOfWS)
+                let predicate = NSPredicate(format: "%K == %@","nameOfWD",currentContext)
                 
                 
                 fetchRequest.predicate = predicate
@@ -666,7 +675,7 @@ extension debuggingWindow : NSTableViewDataSource {
     
 }
 
-extension debuggingWindow : NSTableViewDelegate {
+extension contextManager : NSTableViewDelegate {
     
     func tableViewSelectionDidChange(notification: NSNotification) {
        let myTableViewFromNotification = notification.object as! NSTableView
@@ -747,7 +756,7 @@ extension debuggingWindow : NSTableViewDelegate {
             //let predicate = NSPredicate(format: "nameOfWD",loadedWDName)
             
             
-            let predicate = NSPredicate(format: "%K == %@","nameOfWD",nameOfWS)
+            let predicate = NSPredicate(format: "%K == %@","nameOfWD",currentContext)
             
             
             fetchRequest.predicate = predicate

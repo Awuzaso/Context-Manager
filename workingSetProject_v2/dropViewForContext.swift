@@ -83,20 +83,12 @@ class dropViewForContext: NSView {
                 
                 singleton.coreDataObject.setValueOfEntityObject("File", idKey: "nameOfFile", nameOfKey: "nameOfPath", idName: fileName!, editName: filePath!)
                 
-                //Swift.print( singleton.coreDataObject.getDataObjects( "File" )  )
-                
-                
-                
-                //singleton.coreDataObject.editEntityObject("File", nameOfKey: "nameOfFile", oldName: fileName!, editName: filePath!)
-                
                 
                 // Create a relationship.
                 
                 let workDomain = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: singleton.openedWD)
                 let file = singleton.coreDataObject.getEntityObject("File", idKey: "nameOfFile", idName: fileName!)
                 
-                
-                //singleton.coreDataObject.createRelationship(workDomain, objectTwo: file, relationshipType: "associatedFiles")
                 
                 let files = workDomain.mutableSetValueForKey("associatedFiles")
                 
@@ -106,15 +98,6 @@ class dropViewForContext: NSView {
                 
                 singleton.coreDataObject.saveManagedContext()
                 
-                
-                // Tell tableview of domain controller to reload.
-                
-                
-                
-                
-                //Swift.print( singleton.coreDataObject.getDataObjects("File") )
-                
-                // Should post a notification to send file name and file path.
                 
                 self.notify()
                 
