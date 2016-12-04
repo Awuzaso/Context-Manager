@@ -207,7 +207,12 @@ class contextManager: NSViewController {
         //updateAddedContentToContext
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateAddedContentToContext:", name: "updateContentStat", object: nil)
+        
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: "aCardWasRead:", name: "cardRead", object: nil)
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchBetweenContextFunc", name: "switch", object: nil)
+        
+        
         
         setupTableView()
         
@@ -264,7 +269,11 @@ class contextManager: NSViewController {
         }
     }
     
-    
+    func aCardWasRead(notification: NSNotification){
+        
+        statusLabel.stringValue = "A unassociated card was read."
+        
+    }
     
     func changeStatus(notification: NSNotification){
         self.switchOnOffButtons(true, deleteActive: true, associateActive: true)
@@ -325,6 +334,12 @@ class contextManager: NSViewController {
         if(currentContext != nil){
             
             //singleton.coreDataObject.getEntityObject("File", idKey: selectedFile , idName: currentContext)
+            
+            
+            
+            updateStatusWD()
+            
+            
             
             NSWorkspace.sharedWorkspace().openFile("/Users/osazuwaokundaye/Downloads/ICIDS2016-Draft3-2.doc", withApplication: "/Applications/Preview.app")
             
@@ -690,6 +705,8 @@ extension contextManager : NSTableViewDataSource {
     
     
 }
+
+
 
 extension contextManager : NSTableViewDelegate {
     

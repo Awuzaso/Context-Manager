@@ -132,6 +132,8 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
      
             print( string )
             
+            NSNotificationCenter.defaultCenter().postNotificationName("cardRead", object: arrayObject)
+
             
             
             let sendVal = (string as NSString).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -142,6 +144,8 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
             
             // - Case if card is in data base.
                 if(cardIsInDB == false){
+                    
+                    /*
                     print("Card is not in the database.")
                     // - Brings up a modal window to tell user that the card is a new to the database.
 //                    if(singleton.canOpenAssocWindow == true){
@@ -149,21 +153,28 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
 //                        singleton.openWindowObject.runModalWindow()
 //                    }
                     
-                    
+                    */
                     
                     
                     singleton.readCard = singleton.coreDataObject.getEntityObject("Card", idKey: "rfidValue", idName: sendVal)
-                    NSNotificationCenter.defaultCenter().postNotificationName("enableAssoc", object: nil)
+                    
+                    //NSNotificationCenter.defaultCenter().postNotificationName("enableAssoc", object: nil)
+
+
                 }
             // - Case if card read is in the data base.
                 else{
                     print("Card is in the database.")
+                    
+                    
                     // - Assigns the value of the currently read card.
                         singleton.readCard = singleton.coreDataObject.getEntityObject("Card", idKey: "rfidValue", idName: sendVal)
+                    
+                    /*
                         //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
                     // - Enables the option to associate card.
                         singleton.canAssociateVar = true
-                    
+                    */
                     
                     // - Retrieves the WD associated with the card and assigns it to a constant to be retrieve from fault.
                         let associatedWD = singleton.readCard.valueForKey("associatedWD")
@@ -176,10 +187,14 @@ class SerialPortManager:NSObject,ORSSerialPortDelegate{
                             // - 1 - Sets the value of the currently opened WD to the name value associated with the card.
                             singleton.openedWD = associatedWD?.valueForKey("nameOfWD") as! String
                             //NSNotificationCenter.defaultCenter().postNotificationName("UVS", object: nil)
-                            NSNotificationCenter.defaultCenter().postNotificationName("associateWindow", object: nil)
+                            //NSNotificationCenter.defaultCenter().postNotificationName("associateWindow", object: nil)
+                            NSNotificationCenter.defaultCenter().postNotificationName("switch", object: nil)
+
                         }
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName("enableAssoc", object: nil)
+                    //NSNotificationCenter.defaultCenter().postNotificationName("enableAssoc", object: nil)
+
+
                 }
             
         }
