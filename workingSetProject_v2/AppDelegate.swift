@@ -42,6 +42,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // - 3 - Launch WSDM window.
             //launchWSDM_Window(self)
         
+        
+        
+        //OpenURL()
+        //CheckChromeTabs()
+        
     }
 
     
@@ -55,6 +60,85 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             windowController.showWindow(sender)
     }
 
+    
+    func CheckChromeTabs()
+        
+    {
+        /*From Shyam*/
+        let myAppleScript = "set r to \"\"\n" +
+            
+            "tell application \"Google Chrome\"\n" +
+            
+            "repeat with w in windows\n" +
+            
+            "repeat with t in tabs of w\n" +
+            
+            "tell t to set r to r & \"Title : \" & title & \", URL : \" & URL & linefeed\n" +
+            
+            "end repeat\n" +
+            
+            "end repeat\n" +
+            
+            "end tell\n" +
+            
+        "return r"
+        
+        var error: NSDictionary?
+        
+        let scriptObject = NSAppleScript(source: myAppleScript)
+        
+        if let output: NSAppleEventDescriptor = scriptObject?.executeAndReturnError(&error)
+            
+        {
+            
+            let titlesAndURLs = output.stringValue!
+            
+            print(titlesAndURLs)
+            
+        }
+            
+        else if (error != nil)
+            
+        {
+            
+            print("error: \(error)")
+            
+        }
+        
+    }
+    
+    
+    
+    func OpenURL()
+        
+    {
+        /*From Shyam*/
+        //var url: NSURL!
+        
+        
+        
+        print("OpenURL")
+        
+        
+        
+        if let url = NSURL(string: "https://www.google.com") where NSWorkspace.sharedWorkspace().openURL(url) //NSWorkspace.shared().open(url)
+            
+        {
+            
+            print("default browser was successfully opened")
+            
+        }
+            
+        else
+            
+        {
+            
+            print("browser was not opened successfully")
+            
+        }
+        
+    }
+    
     
 }
 

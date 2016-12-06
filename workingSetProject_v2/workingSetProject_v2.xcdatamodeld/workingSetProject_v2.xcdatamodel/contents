@@ -15,6 +15,12 @@
         <attribute name="yWindowPosition" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="associatedWD" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkingDomain" inverseName="associatedFiles" inverseEntity="WorkingDomain" syncable="YES"/>
     </entity>
+    <entity name="Session" syncable="YES">
+        <attribute name="desktopSession" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameOfSession" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="webSession" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="associatedWD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkingDomain" inverseName="associatedSession" inverseEntity="WorkingDomain" syncable="YES"/>
+    </entity>
     <entity name="User_Attr" syncable="YES">
         <attribute name="attribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serialPortPath" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,11 +31,13 @@
         <attribute name="noteForWD" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="associatedCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="associatedWD" inverseEntity="Card" syncable="YES"/>
         <relationship name="associatedFiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="File" inverseName="associatedWD" inverseEntity="File" syncable="YES"/>
+        <relationship name="associatedSession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="associatedWD" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
         <element name="Card" positionX="-63" positionY="27" width="128" height="135"/>
         <element name="File" positionX="-54" positionY="9" width="128" height="120"/>
         <element name="User_Attr" positionX="-54" positionY="9" width="128" height="75"/>
-        <element name="WorkingDomain" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="WorkingDomain" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Session" positionX="-54" positionY="54" width="128" height="30"/>
     </elements>
 </model>

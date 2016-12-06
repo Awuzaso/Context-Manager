@@ -216,7 +216,7 @@ class contextManager: NSViewController {
         
         setupTableView()
         
-        
+        /*
         let options = CGWindowListOption(arrayLiteral: CGWindowListOption.ExcludeDesktopElements, CGWindowListOption.OptionOnScreenOnly)
         
         let windowListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))
@@ -226,7 +226,7 @@ class contextManager: NSViewController {
         
         
         print(infoList)
-        
+        */
         
         //tableViewWD.hidden = true
 
@@ -327,9 +327,14 @@ class contextManager: NSViewController {
         singleton.serialPortObject.openSerialPort()
         
     }
-    
+    func switchContents(){
+        print("Content was switched.")
+    }
     
     @IBAction func switchBetweenContextFunc(sender: AnyObject) {
+        
+        
+
         
         if(currentContext != nil){
             
@@ -341,7 +346,35 @@ class contextManager: NSViewController {
             
             
             
-            NSWorkspace.sharedWorkspace().openFile("/Users/osazuwaokundaye/Downloads/ICIDS2016-Draft3-2.doc", withApplication: "/Applications/Preview.app")
+            //NSWorkspace.sharedWorkspace().openFile("/Users/osazuwaokundaye/Downloads/ICIDS2016-Draft3-2.doc", withApplication: "/Applications/Preview.app")
+            //singleton.googleChromeObject.closeWindows()
+            
+            //switchContents()
+            
+            singleton.googleChromeObject.closeWindows()
+            
+            
+            let nameOfSession = currentContext + " Web Session"
+            
+            
+            let sessionObject = singleton.coreDataObject.getEntityObject("Session", idKey: "nameOfSession", idName: nameOfSession)
+            
+            let testValue = sessionObject.valueForKey("webSession") as! String
+            
+            
+            
+            
+            //print("Websession value " + testValue)
+            
+            
+            
+            
+            singleton.googleChromeObject.OpenCollectedURLS(testValue)
+            
+            
+            
+            
+            //singleton.googleChromeObject.OpenURL()
             
             statusLabel.stringValue = "The context was switched to " + currentContext
         }
@@ -398,6 +431,54 @@ class contextManager: NSViewController {
         
         reloadFileList()
     }
+    
+    
+    @IBAction func saveSession(sender: AnyObject) {
+        
+        if(currentContext != nil){
+            
+            //singleton.googleChromeObject.CheckChromeTabs()
+            //singleton.googleChromeObject.OpenURL()
+            //singleton.googleChromeObject.closeWindows()
+            
+            
+            
+            let nameOfSession = currentContext + " Web Session"
+           
+            singleton.coreDataObject.addEntityObject("Session", nameOfKey: "nameOfSession", nameOfObject: nameOfSession )
+            
+            
+            let collectedURL = singleton.googleChromeObject.getURLFromBrowser()
+            
+            
+            singleton.coreDataObject.setValueOfEntityObject("Session", idKey: "nameOfSession", nameOfKey: "webSession", idName: nameOfSession, editName: collectedURL)
+            
+            
+            //let sessionObject = singleton.coreDataObject.getEntityObject("Session", idKey: "nameOfSession", idName: nameOfSession)
+            
+            //let testValue = sessionObject.valueForKey("webSession") as! String
+            
+            
+            
+            
+            //print("Websession value " + testValue)
+            
+            
+            
+            
+            //singleton.googleChromeObject.OpenCollectedURLS(testValue)
+            
+            /*
+            
+            let openedWD = singleton.coreDataObject.getEntityObject("WorkingDomain", idKey: "nameOfWD", idName: currentContext)
+            
+            singleton.coreDataObject.createRelationship(openedWD, objectTwo: singleton.readCard, relationshipType: "associatedCard")
+            
+            */
+        
+        }
+    }
+    
     
     func rmvFile(){
         singleton.coreDataObject.deleteEntityObject("File", nameOfKey: "nameOfFile", nameOfObject: selectedFile)
@@ -604,6 +685,12 @@ extension contextManager : NSTableViewDataSource {
             print (filePath)
             
             NSWorkspace.sharedWorkspace().selectFile(nil, inFileViewerRootedAtPath: filePath)
+            
+            
+//            
+//            singleton.googleChromeObject.CheckChromeTabs()
+//            
+//            singleton.googleChromeObject.OpenURL()
         }
 
         

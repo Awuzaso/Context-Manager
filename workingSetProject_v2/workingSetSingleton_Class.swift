@@ -19,6 +19,7 @@ class workingSetSingleton {
         var coreDataObject = dataCore()
         var serialPortObject: SerialPortManager!
         let openWindowObject = windowManager()
+        let googleChromeObject = chromeManager()
     
     /*Frequently Used Variables*/
     

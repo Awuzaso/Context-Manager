@@ -29,6 +29,8 @@
 		B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */; };
 		B913B2AF1DF33DD9004DEED2 /* tableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B913B2AE1DF33DD9004DEED2 /* tableViewManager.swift */; };
 		B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */; };
+		B985347D1DF4D8DA0049AE5B /* chromeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B985347C1DF4D8DA0049AE5B /* chromeManager.swift */; settings = {ASSET_TAGS = (); }; };
+		B9EF5A2C1DF5D99C0055319B /* closeAllApps.scpt in Resources */ = {isa = PBXBuildFile; fileRef = B9EF5A2B1DF5D99C0055319B /* closeAllApps.scpt */; settings = {ASSET_TAGS = (); }; };
 		D17879951DF36444009C904D /* add_context1.png in Resources */ = {isa = PBXBuildFile; fileRef = D17879931DF36444009C904D /* add_context1.png */; };
 		D17879961DF36444009C904D /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = D17879941DF36444009C904D /* switch.png */; };
 /* End PBXBuildFile section */
@@ -64,6 +66,8 @@
 		B910D0531DF2122B00D76369 /* contextManagerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contextManagerWindowController.swift; sourceTree = "<group>"; };
 		B913B2AE1DF33DD9004DEED2 /* tableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableViewManager.swift; sourceTree = "<group>"; };
 		B92C7D3F1DF0B41100743806 /* dropViewForContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dropViewForContext.swift; sourceTree = "<group>"; };
+		B985347C1DF4D8DA0049AE5B /* chromeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chromeManager.swift; sourceTree = "<group>"; };
+		B9EF5A2B1DF5D99C0055319B /* closeAllApps.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = closeAllApps.scpt; sourceTree = "<group>"; };
 		D17879931DF36444009C904D /* add_context1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_context1.png; sourceTree = "<group>"; };
 		D17879941DF36444009C904D /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +130,7 @@
 				4C723AB11D2966CB00E3CB51 /* Main.storyboard */,
 				4C723AB41D2966CB00E3CB51 /* Info.plist */,
 				4CD075E41D3D8DD8009DAE45 /* workingSetProject_v2.xcdatamodeld */,
+				B985347C1DF4D8DA0049AE5B /* chromeManager.swift */,
 			);
 			name = supportingResources;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 		B913B2AD1DF33A8C004DEED2 /* ContextManagerCode */ = {
 			isa = PBXGroup;
 			children = (
+				B9EF5A2B1DF5D99C0055319B /* closeAllApps.scpt */,
 				4C723AE31D2B825A00E3CB51 /* singletonClass */,
 				4C723ABA1D29671100E3CB51 /* appDelegate */,
 				4C723ABF1D2972F700E3CB51 /* supportingResources */,
@@ -265,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D17879951DF36444009C904D /* add_context1.png in Resources */,
+				B9EF5A2C1DF5D99C0055319B /* closeAllApps.scpt in Resources */,
 				D17879961DF36444009C904D /* switch.png in Resources */,
 				4C723AB01D2966CB00E3CB51 /* Assets.xcassets in Resources */,
 				4C723AB31D2966CB00E3CB51 /* Main.storyboard in Resources */,
@@ -287,6 +294,7 @@
 				B910D0541DF2122B00D76369 /* contextManagerWindowController.swift in Sources */,
 				4C723AD41D297AC800E3CB51 /* ORSSerialBuffer.m in Sources */,
 				B92C7D401DF0B41100743806 /* dropViewForContext.swift in Sources */,
+				B985347D1DF4D8DA0049AE5B /* chromeManager.swift in Sources */,
 				4C723AC21D29743000E3CB51 /* CoreDataClass_Ext.swift in Sources */,
 				4C723AD71D297AC800E3CB51 /* ORSSerialPortManager.m in Sources */,
 				4C723AD81D297AC800E3CB51 /* ORSSerialRequest.m in Sources */,

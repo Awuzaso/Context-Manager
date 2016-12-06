@@ -36,8 +36,13 @@ class dropViewForContext: NSView {
     
     override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
         
+        
+        Swift.print("Dragging entered operation ...")
+        Swift.print(sender)
+        
         if(singleton.openedWD != nil){
         if let pasteboard = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
+            Swift.print(pasteboard.description)
             if let path = pasteboard[0] as? String {
                 //Swift.print(path)
                 let ext = NSURL(fileURLWithPath: path).pathExtension
@@ -47,6 +52,18 @@ class dropViewForContext: NSView {
                 //}
             }
         }
+            if let pasteboard = sender.draggingPasteboard().propertyListForType("NSURLPboardType") as? NSArray {
+                Swift.print("URL PboardType")
+                Swift.print(pasteboard.description)
+                if let path = pasteboard[0] as? String {
+                    //Swift.print(path)
+                    //let ext = NSURL(fileURLWithPath: path).pathExtension
+                    //if ext == expectedExt {
+                    //self.layer?.backgroundColor = NSColor.blueColor().CGColor
+                    return NSDragOperation.Copy
+                    //}
+                }
+            }
         }
         return NSDragOperation.None
     }
@@ -62,6 +79,9 @@ class dropViewForContext: NSView {
     }
     
     override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+        
+        Swift.print("Performing dragging operation...")
+        
         self.layer?.backgroundColor = NSColor.greenColor().CGColor
 
         if let pasteboard = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
@@ -111,6 +131,10 @@ class dropViewForContext: NSView {
                 
                 return true
             }
+            
+            
+            
+            
         }
         return false
     }
