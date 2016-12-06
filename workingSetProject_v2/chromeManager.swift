@@ -122,7 +122,7 @@ class chromeManager{
             
             let titlesAndURLs = output.stringValue!
             
-            //print(titlesAndURLs)
+            print(titlesAndURLs)
             
         }
             

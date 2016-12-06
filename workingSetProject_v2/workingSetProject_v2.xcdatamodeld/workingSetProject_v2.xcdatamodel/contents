@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="16B2657" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Card" syncable="YES">
         <attribute name="cardName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cardOwner" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,6 +18,7 @@
     <entity name="Session" syncable="YES">
         <attribute name="desktopSession" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameOfSession" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="previewSession" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="webSession" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="associatedWD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkingDomain" inverseName="associatedSession" inverseEntity="WorkingDomain" syncable="YES"/>
     </entity>
@@ -36,8 +37,8 @@
     <elements>
         <element name="Card" positionX="-63" positionY="27" width="128" height="135"/>
         <element name="File" positionX="-54" positionY="9" width="128" height="120"/>
+        <element name="Session" positionX="-54" positionY="54" width="128" height="120"/>
         <element name="User_Attr" positionX="-54" positionY="9" width="128" height="75"/>
         <element name="WorkingDomain" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="Session" positionX="-54" positionY="54" width="128" height="30"/>
     </elements>
 </model>

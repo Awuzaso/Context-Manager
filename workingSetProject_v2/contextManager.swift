@@ -52,6 +52,10 @@ class contextManager: NSViewController {
     @IBOutlet weak var textField: NSTextField!
     
     
+    
+    @IBOutlet weak var redDot: NSImageView!
+    @IBOutlet weak var greenDot: NSImageView!
+    
     func setupTableView(){
         tableViewWD!.setDelegate(self)
         tableViewWD!.setDataSource(self)
@@ -132,11 +136,15 @@ class contextManager: NSViewController {
         let recievedValue = arrayObject[0] as! Bool
         
         if(recievedValue == true){
-            scannerStatus.textColor = NSColor.greenColor()
+            redDot.hidden = true
+            greenDot.hidden = false
+            //    scannerStatus.textColor = NSColor.greenColor()
             scannerStatus.stringValue = "Scanner is connected."
         }
         else{
-            scannerStatus.textColor = NSColor.redColor()
+            greenDot.hidden = true
+            redDot.hidden = false
+            //     scannerStatus.textColor = NSColor.redColor()
             scannerStatus.stringValue = "Scanner is disconnected."
         }
     }
@@ -351,27 +359,29 @@ class contextManager: NSViewController {
             
             //switchContents()
             
+            //##########Commented for testing################
             singleton.googleChromeObject.closeWindows()
             
             
             let nameOfSession = currentContext + " Web Session"
             
-            
             let sessionObject = singleton.coreDataObject.getEntityObject("Session", idKey: "nameOfSession", idName: nameOfSession)
+        
             
             let testValue = sessionObject.valueForKey("webSession") as! String
+            let windowsGetValue = sessionObject.valueForKey("desktopSession") as! String
+            let previewGetValue = sessionObject.valueForKeyPath("previewSession") as! String
             
-            
-            
-            
-            //print("Websession value " + testValue)
+            print("WindowsSession Value" + windowsGetValue)
+            print("PreviewSession Value" + previewGetValue)
+            print("Websession value " + testValue)
             
             
             
             
             singleton.googleChromeObject.OpenCollectedURLS(testValue)
-            
-            
+            singleton.desktopWindowObject.openAllWindows(windowsGetValue)
+            singleton.previewObject.openAllPreviews(previewGetValue)
             
             
             //singleton.googleChromeObject.OpenURL()
@@ -444,15 +454,21 @@ class contextManager: NSViewController {
             
             
             let nameOfSession = currentContext + " Web Session"
+
+            
            
             singleton.coreDataObject.addEntityObject("Session", nameOfKey: "nameOfSession", nameOfObject: nameOfSession )
-            
+            //singleton.coreDataObject.addEntityObject("Session", nameOfKey: "desktopSession", nameOfObject: desktopSession)
             
             let collectedURL = singleton.googleChromeObject.getURLFromBrowser()
+            let collectedWindows = singleton.desktopWindowObject.getCurrentWindows()
+            let collectedPreviews = singleton.previewObject.getCurrentPreviewFiles()
             
+            print("Collected Window List :"+collectedPreviews)
             
             singleton.coreDataObject.setValueOfEntityObject("Session", idKey: "nameOfSession", nameOfKey: "webSession", idName: nameOfSession, editName: collectedURL)
-            
+            singleton.coreDataObject.setValueOfEntityObject("Session", idKey: "nameOfSession", nameOfKey: "desktopSession", idName: nameOfSession, editName: collectedWindows)
+            singleton.coreDataObject.setValueOfEntityObject("Session", idKey: "nameOfSession", nameOfKey: "previewSession", idName: nameOfSession, editName: collectedPreviews)
             
             //let sessionObject = singleton.coreDataObject.getEntityObject("Session", idKey: "nameOfSession", idName: nameOfSession)
             

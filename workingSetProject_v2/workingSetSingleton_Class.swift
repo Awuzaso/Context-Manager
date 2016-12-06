@@ -20,6 +20,8 @@ class workingSetSingleton {
         var serialPortObject: SerialPortManager!
         let openWindowObject = windowManager()
         let googleChromeObject = chromeManager()
+        let desktopWindowObject = desktopWindowManger()
+        let previewObject = previewManager()
     
     /*Frequently Used Variables*/
     

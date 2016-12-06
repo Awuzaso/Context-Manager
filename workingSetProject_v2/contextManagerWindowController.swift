@@ -16,7 +16,7 @@ class contextManagerWindowController: NSWindowController {
         
         
         
-        window?.backgroundColor = NSColor.yellowColor()
+        //window?.backgroundColor = NSColor.yellowColor()
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
 
